@@ -1,0 +1,35 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+void writeFile(ofstream& out,string str);
+void readFile(ifstream& in);
+int main(){
+	ifstream in;
+	ofstream out;
+	string fileName="test.dat";
+	//just write something in the file
+	out.open(fileName.c_str(),ios::out);
+	string text="aabbccdd";
+	writeFile(out,text);
+	//The task is as follows
+	in.open(fileName.c_str(),ios::in);
+	readFile(in);
+	return 0;
+}
+void writeFile(ofstream& out,string str){
+	out<<str;
+	out.close();
+}
+void readFile(ifstream& in){
+	char c;
+	int offset=0;
+	while(in>>c){
+		cout<<c;
+		offset+=2;
+		in.seekg(offset,ios::beg);
+	}
+	cout<<endl;
+	in.close();
+}
